@@ -10,7 +10,7 @@
             :src="
               currentEnv === 'development'
                 ? 'img/now-logo.png'
-                : 'webjars/the-gate-user-panel/v1.0.3/img/now-logo.png'
+                : 'webjars/the-gate-user-panel/v1.0.4/img/now-logo.png'
             "
             alt=""
           />
@@ -41,7 +41,7 @@ export default {
     backgroundImageStyle() {
       return this.currentEnv === "development"
         ? "background-image: url('img/header.jpg');"
-        : "background-image: url('webjars/the-gate-user-panel/v1.0.3/img/header.jpg');";
+        : "background-image: url('webjars/the-gate-user-panel/v1.0.4/img/header.jpg');";
     },
   },
   methods: {
