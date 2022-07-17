@@ -30,9 +30,9 @@ processResources.dependsOn(npm_install)
 processResources.dependsOn(npm_run_build)
 
 jar {
-  archiveBaseName.set('the-gate-user-panal')
-  version = "${project.version}"
-  into("META-INF/resources/webjars/${archiveBaseName.get()}/${project.version}") {
+  archiveBaseName.set('the-gate-user-panel')
+  version = "${version}"
+  into("META-INF/resources/webjars/${archiveBaseName.get()}/${version}") {
       from 'dist'
   }
 }
