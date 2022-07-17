@@ -9,12 +9,6 @@
       <div class="row justify-content-center">
         <div class="col-10">
           <el-carousel height="500px">
-            <el-carousel-item>
-              <img class="d-block" src="img/bg5.jpg" alt="First slide" />
-              <div class="carousel-caption d-none d-md-block">
-                <h5>Nature, United States</h5>
-              </div>
-            </el-carousel-item>
             <el-carousel-item v-for="event in events" :key="event.shortName">
               <a
                 :href="`https://thegateticket.herokuapp.com/event/${event.shortName}`"

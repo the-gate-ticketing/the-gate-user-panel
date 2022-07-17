@@ -1,6 +1,6 @@
 <template>
   <footer
-    class="footer"
+    class="footer fixed-footer"
     :class="{ [`footer-${type}`]: type }"
     :data-background-color="backgroundColor"
   >
@@ -24,4 +24,11 @@ export default {
   },
 };
 </script>
-<style></style>
+<style scoped>
+.fixed-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 4rem;
+}
+</style>
