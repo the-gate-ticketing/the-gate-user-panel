@@ -5,37 +5,37 @@
         <div class="col-md-12 ml-auto mr-auto text-center">
           <h2 class="title">All available tickets</h2>
         </div>
-        <div
-          v-for="event in events"
-          :key="event.shortName"
-          class="col-md-4 mt-2"
-        >
-          <el-card class="h-100">
-            <img
-              :src="`https://thegateticket.herokuapp.com/file/${event.fileBlobId}`"
-            />
-            <div class="p-3">
-              <span class="d-block font-weight-bold">
-                {{ event.title["en"] }}
-              </span>
-              <span class="d-block mt-2">
-                {{ event.formattedBeginDate["en"] }} -
-                {{ event.formattedEndDate["en"] }}
-              </span>
-              <span class="d-block font-weight-bold mt-2">
-                {{ event.location }}
-              </span>
-              <!-- <span class="d-block mt-2">
+        <div v-if="events.length">
+          <div
+            v-for="event in events"
+            :key="event.shortName"
+            class="col-md-4 mt-2"
+          >
+            <el-card class="h-100">
+              <img :src="`/file/${event.fileBlobId}`" />
+              <div class="p-3">
+                <span class="d-block font-weight-bold">
+                  {{ event.title["en"] }}
+                </span>
+                <span class="d-block mt-2">
+                  {{ event.formattedBeginDate["en"] }} -
+                  {{ event.formattedEndDate["en"] }}
+                </span>
+                <span class="d-block font-weight-bold mt-2">
+                  {{ event.location }}
+                </span>
+                <!-- <span class="d-block mt-2">
                 600 <i class="el-icon-right"></i> 800 EGP
               </span> -->
-              <a
-                class="btn btn-primary"
-                :href="`https://thegateticket.herokuapp.com/event/${event.shortName}`"
-              >
-                Book Now
-              </a>
-            </div>
-          </el-card>
+                <a class="btn btn-primary" :href="`/event/${event.shortName}`">
+                  Book Now
+                </a>
+              </div>
+            </el-card>
+          </div>
+        </div>
+        <div v-else class="col-12 text-center">
+          <p>No tickets are available at the moment.</p>
         </div>
       </div>
     </div>

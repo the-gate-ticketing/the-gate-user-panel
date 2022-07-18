@@ -9,7 +9,7 @@ import About from "../pages/About";
 
 Vue.use(Router);
 
-export const HOME_PATH = "/home";
+export const HOME_PATH = "/";
 export const EVENTS_PATH = "/events";
 export const POLICIES_PATH = "/our-policies";
 export const ABOUT_PATH = "/about-us";
@@ -19,10 +19,6 @@ export default new Router({
   mode: "history",
   linkExactActiveClass: "active",
   routes: [
-    {
-      path: "/",
-      redirect: HOME_PATH,
-    },
     {
       path: HOME_PATH,
       name: HOME_PATH,
@@ -55,6 +51,10 @@ export default new Router({
       props: {
         footer: { backgroundColor: "black" },
       },
+    },
+    {
+      path: "*",
+      redirect: HOME_PATH,
     },
   ],
   scrollBehavior: (to) => {

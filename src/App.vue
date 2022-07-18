@@ -7,12 +7,14 @@
     <router-view name="footer" />
   </div>
 </template>
-<script>
-export default {};
-</script>
 <style scoped>
 .wrapper {
-  padding-bottom: 4rem;
+  padding-bottom: 16rem;
+}
+@media (max-width: 480px) and (min-width: 320px) {
+  .wrapper {
+    padding-bottom: 32rem;
+  }
 }
 .full-size {
   min-height: 100%;

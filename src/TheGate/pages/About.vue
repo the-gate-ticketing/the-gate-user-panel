@@ -5,10 +5,16 @@
         <div class="col-md-8 ml-auto mr-auto text-center">
           <h2 class="title">Who we are?</h2>
           <h5 class="description">
-            According to the National Oceanic and Atmospheric Administration,
-            Ted, Scambos, NSIDClead scentist, puts the potentially record low
-            maximum sea ice extent tihs year down to low ice extent in the
-            Pacific and a late drop in ice extent in the Barents Sea.
+            TheGate.eg is a renowned service provider that provides flawless
+            networking solutions as well as a cutting-edge ticketing platform.
+            We aspire to provide our clients with smooth and innovative
+            solutions to solve all of their corporate and personal challenges in
+            order to join the digital transformation era. We want to inspire our
+            clients and their networks to go green as the globe becomes more
+            eco-friendly and environmentally conscientious. <br />
+            In today's world, when technology advancements rule our lifestyles,
+            it's critical that entertainment and event venues implement such
+            technological advancements in their operations.
           </h5>
         </div>
       </div>
@@ -16,62 +22,45 @@
       <div class="section-story-overview">
         <div class="row">
           <div class="col-md-6">
-            <div
-              class="image-container image-left"
-              style="background-image: url('img/login.jpg')"
-            >
-              <!-- First image on the left side -->
-              <p class="blockquote blockquote-primary">
-                "Over the span of the satellite record, Arctic sea ice has been
-                declining significantly, while sea ice in the Antarctichas
-                increased very slightly"
-                <br />
-                <br />
-                <small>-NOAA</small>
-              </p>
-            </div>
             <!-- Second image on the left side of the article -->
             <div
               class="image-container"
               style="background-image: url('img/bg3.jpg')"
             ></div>
           </div>
-          <div class="col-md-5">
+          <div class="col-md-6">
             <!-- First image on the right side, above the article -->
             <div
               class="image-container image-right"
               style="background-image: url('img/bg1.jpg')"
             ></div>
-            <h3>
-              So what does the new record for the lowest level of winter ice
-              actually mean
-            </h3>
-            <p>
-              The Arctic Ocean freezes every winter and much of the sea-ice then
-              thaws every summer, and that process will continue whatever
-              happens with climate change. Even if the Arctic continues to be
-              one of the fastest-warming regions of the world, it will always be
-              plunged into bitterly cold polar dark every winter. And
-              year-by-year, for all kinds of natural reasons, there’s huge
-              variety of the state of the ice.
-            </p>
-            <p>
-              For a start, it does not automatically follow that a record amount
-              of ice will melt this summer. More important for determining the
-              size of the annual thaw is the state of the weather as the
-              midnight sun approaches and temperatures rise. But over the more
-              than 30 years of satellite records, scientists have observed a
-              clear pattern of decline, decade-by-decade.
-            </p>
-            <p>
-              The Arctic Ocean freezes every winter and much of the sea-ice then
-              thaws every summer, and that process will continue whatever
-              happens with climate change. Even if the Arctic continues to be
-              one of the fastest-warming regions of the world, it will always be
-              plunged into bitterly cold polar dark every winter. And
-              year-by-year, for all kinds of natural reasons, there’s huge
-              variety of the state of the ice.
-            </p>
+          </div>
+          <div class="col-12 text-center">
+            <h2 class="title">What We Provide</h2>
+            <h5 class="description">
+              <ul class="list-unstyled">
+                <li>Platform for flexible ticketing</li>
+                <li class="m-2">
+                  Event promotion through TheGate Website, SMS, email, social
+                  media using QR codes.
+                </li>
+                <li class="m-2">
+                  Digital invites sent through various methods (Email, SMS,
+                  Whatsapp).
+                </li>
+                <li class="m-2">
+                  Customized smart ticketing style with QR code access to match
+                  the tone of the event RSVP in a variety of ways, <br />
+                  (Email, SMS, Whatsapp).
+                </li>
+                <li class="m-2">Data analytics from the occasion.</li>
+                <li class="m-2">
+                  Technical assistance, on-the-ground management and
+                  registration crew.
+                </li>
+                <li class="m-2">Event seating plan for seated events.</li>
+              </ul>
+            </h5>
           </div>
         </div>
       </div>
