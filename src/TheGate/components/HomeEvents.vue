@@ -12,7 +12,7 @@
             See More
           </router-link>
         </div>
-        <div v-if="events.length">
+        <div v-if="events.length" class="row">
           <div
             v-for="event in events.slice(0, 6)"
             :key="event.shortName"

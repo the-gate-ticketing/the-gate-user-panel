@@ -35,7 +35,7 @@
           </a>
           <a
             target="_blank"
-            href="https://www.facebook.com"
+            href="https://www.facebook.com/TheGategy/"
             class="btn btn-neutral btn-icon btn-facebook btn-round"
             rel="tooltip"
             title="Like us"
@@ -44,7 +44,7 @@
           </a>
           <a
             target="_blank"
-            href="https://www.instagram.com"
+            href="https://instagram.com/thegategy?igshid=YmMyMTA2M2Y="
             class="btn btn-neutral btn-icon btn-instagram btn-round"
             rel="tooltip"
             title="Follow us"

@@ -5,7 +5,7 @@
         <div class="col-md-12 ml-auto mr-auto text-center">
           <h2 class="title">All available tickets</h2>
         </div>
-        <div v-if="events.length">
+        <div v-if="events.length" class="row">
           <div
             v-for="event in events"
             :key="event.shortName"
