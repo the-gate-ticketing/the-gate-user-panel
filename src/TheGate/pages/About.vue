@@ -38,8 +38,8 @@
           <div class="col-12 text-center">
             <h2 class="title">What We Provide</h2>
             <h5 class="description">
-              <ul class="list-unstyled">
-                <li>Platform for flexible ticketing</li>
+              <ul class="dash">
+                <li>Platform for flexible ticketing.</li>
                 <li class="m-2">
                   Event promotion through TheGate Website, SMS, email, social
                   media using QR codes.
@@ -67,3 +67,20 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+.description {
+  font-weight: 700;
+}
+ul.dash {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 1em;
+}
+ul.dash > li:before {
+  display: inline-block;
+  content: "-";
+  width: 1em;
+  margin-left: -1em;
+}
+</style>
