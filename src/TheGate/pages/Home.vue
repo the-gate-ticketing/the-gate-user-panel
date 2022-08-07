@@ -35,8 +35,8 @@ export default {
     },
     backgroundImageStyle() {
       return this.currentEnv === "development"
-        ? "background-image: url('/home-bg.jpg');"
-        : `background-image: url('webjars/the-gate-user-panel/v${this.version}/home-bg.jpg');`;
+        ? "background-image: url('/home-bg.jpeg');"
+        : `background-image: url('webjars/the-gate-user-panel/v${this.version}/home-bg.jpeg');`;
     },
   },
   methods: {
