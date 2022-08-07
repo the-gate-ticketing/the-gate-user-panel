@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-const SET_EVENTS = 'SET_EVENTS';
+const SET_EVENTS = "SET_EVENTS";
 
 const state = {
   events: [],
@@ -12,9 +12,7 @@ const getters = {
 
 const actions = {
   async fetchEvents({ commit }) {
-    const { data } = await axios.get(
-      'http://thegateticket.herokuapp.com/api/v2/public/events'
-    );
+    const { data } = await axios.get("/api/v2/public/events");
     commit(SET_EVENTS, data);
   },
 };

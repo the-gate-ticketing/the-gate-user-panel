@@ -7,31 +7,25 @@
         </div>
       </div>
       <el-card :body-style="{ padding: '35px' }">
-        <h5 class="mt-0">Privacy Policy</h5>
+        <router-link :to="PRIVACY_POLICIES_PATH">
+          <h5 class="mt-0"><u>Privacy Policy</u></h5>
+        </router-link>
         <p class="blockquote">
-          Welcome to Ticketsmarche! Please know that it is very important to us
-          to protect your personal information. You must also know that we
-          totally respect your privacy. Our Privacy Policy is there to explain
-          how we handle the information you share with us. The policy applies to
-          everyone who uses our services, including call center, website, or
-          walk-in customers. The policy also applies to every piece of
-          information provided to us by you...
+          We want you to understand that protecting your personal information is
+          important to us. You should also be aware of our complete regard for
+          your privacy. To describe how we manage the data you give to us,
+          please refer to our Privacy Policy. Everyone who access our services
+          in any way is subject to the policy. Every sort of data you give us is
+          likewise covered by this policy.
         </p>
-        <h5 class="mt-0">Purchase Policy</h5>
+        <router-link :to="PURCHASE_POLICIES_PATH">
+          <h5 class="mt-0"><u>Purchase Policy</u></h5>
+        </router-link>
         <p class="blockquote">
-          Our goal at Ticketsmarche.com is to make your shopping experience
-          enjoyable, easy, and efficient, so that you can be on your way to the
-          events as quickly as possible. Our purchase policies are put to ensure
-          that you are satisfied and for you to understand how things work in
-          Ticketsmarche.com...
-        </p>
-        <h5 class="mt-0">Terms of Use</h5>
-        <p class="blockquote">
-          Welcome to Ticketsmarche.com The following are the Terms of Use (these
-          "Terms") that govern use of the Ticketsmarche.com web sites By using
-          or visiting the Site, you expressly agree to be bound by these Terms
-          and to follow these Terms and all applicable laws and regulations
-          governing the Site...
+          Our goal is to make your purchasing experience pleasurable
+          and simple, so you can get to the activities early as possible. Our
+          purchasing regulations must be followed to make sure everything is
+          correct and that you are aware of how things operate at The Gate.
         </p>
       </el-card>
     </div>
@@ -39,11 +33,21 @@
 </template>
 
 <script>
+import { PURCHASE_POLICIES_PATH, PRIVACY_POLICIES_PATH } from "../router";
 import { Card } from "element-ui";
 
 export default {
   components: {
     [Card.name]: Card,
   },
+  data() {
+    return { PURCHASE_POLICIES_PATH, PRIVACY_POLICIES_PATH };
+  },
 };
 </script>
+
+<style scoped>
+.blockquote {
+  font-weight: 500;
+}
+</style>

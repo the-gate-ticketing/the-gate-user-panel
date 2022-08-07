@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="full-size" id="app">
     <router-view name="header" />
     <div class="wrapper">
       <router-view />
@@ -7,6 +7,17 @@
     <router-view name="footer" />
   </div>
 </template>
-<script>
-export default {};
-</script>
+<style scoped>
+.wrapper {
+  padding-bottom: 16rem;
+}
+@media (max-width: 480px) and (min-width: 320px) {
+  .wrapper {
+    padding-bottom: 32rem;
+  }
+}
+.full-size {
+  min-height: 100%;
+  position: relative;
+}
+</style>

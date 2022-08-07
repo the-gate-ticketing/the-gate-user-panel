@@ -1,16 +1,12 @@
 <template>
   <div>
     <div class="page-header page-header-small" filter-color="orange">
-      <parallax
-        class="page-header-image"
-        style="background-image: url('img/header.jpg')"
-      >
+      <parallax class="page-header-image" :style="backgroundImageStyle">
       </parallax>
       <div class="container">
         <div class="content-center brand">
-          <img class="n-logo" src="img/now-logo.png" alt="" />
           <h1 class="h1-seo">THE GATE</h1>
-          <h3>Your way to parties.</h3>
+          <h3>Your enterance to happiness.</h3>
         </div>
       </div>
     </div>
@@ -22,12 +18,26 @@
 <script>
 import { mapActions } from "vuex";
 import { EventsCarousel, HomeEvents } from "@/TheGate/components";
+import { version } from "../../../package.json";
 
 export default {
   bodyClass: "index-page",
   components: {
     EventsCarousel,
     HomeEvents,
+  },
+  data() {
+    return { version };
+  },
+  computed: {
+    currentEnv() {
+      return process.env.NODE_ENV;
+    },
+    backgroundImageStyle() {
+      return this.currentEnv === "development"
+        ? "background-image: url('/home-bg.jpg');"
+        : `background-image: url('webjars/the-gate-user-panel/v${this.version}/home-bg.jpg');`;
+    },
   },
   methods: {
     ...mapActions({
