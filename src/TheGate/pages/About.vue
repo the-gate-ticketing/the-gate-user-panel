@@ -18,50 +18,33 @@
           </h5>
         </div>
       </div>
-      <div class="separator separator-primary"></div>
-      <div class="section-story-overview">
-        <div class="row">
-          <div class="col-md-6">
-            <!-- Second image on the left side of the article -->
-            <div
-              class="image-container"
-              style="background-image: url('img/bg3.jpg')"
-            ></div>
-          </div>
-          <div class="col-md-6">
-            <!-- First image on the right side, above the article -->
-            <div
-              class="image-container image-right"
-              style="background-image: url('img/bg1.jpg')"
-            ></div>
-          </div>
-          <div class="col-12 text-center">
-            <h2 class="title">What We Provide</h2>
-            <h5 class="description">
-              <ul class="dash">
-                <li>Platform for flexible ticketing.</li>
-                <li class="m-2">
-                  Event promotion through TheGate Website, SMS, email, social
-                  media using QR codes.
-                </li>
-                <li class="m-2">
-                  Digital invites sent through various methods (Email, SMS,
-                  Whatsapp).
-                </li>
-                <li class="m-2">
-                  Customized smart ticketing style with QR code access to match
-                  the tone of the event RSVP in a variety of ways, <br />
-                  (Email, SMS, Whatsapp).
-                </li>
-                <li class="m-2">Data analytics from the occasion.</li>
-                <li class="m-2">
-                  Technical assistance, on-the-ground management and
-                  registration crew.
-                </li>
-                <li class="m-2">Event seating plan for seated events.</li>
-              </ul>
-            </h5>
-          </div>
+      <div class="row">
+        <div class="col-12 text-center">
+          <h2 class="title">What We Provide</h2>
+          <h5 class="description">
+            <ul class="dash">
+              <li>Platform for flexible ticketing.</li>
+              <li class="m-2">
+                Event promotion through TheGate Website, SMS, email, social
+                media using QR codes.
+              </li>
+              <li class="m-2">
+                Digital invites sent through various methods (Email, SMS,
+                Whatsapp).
+              </li>
+              <li class="m-2">
+                Customized smart ticketing style with QR code access to match
+                the tone of the event RSVP in a variety of ways, <br />
+                (Email, SMS, Whatsapp).
+              </li>
+              <li class="m-2">Data analytics from the occasion.</li>
+              <li class="m-2">
+                Technical assistance, on-the-ground management and registration
+                crew.
+              </li>
+              <li class="m-2">Event seating plan for seated events.</li>
+            </ul>
+          </h5>
         </div>
       </div>
     </div>

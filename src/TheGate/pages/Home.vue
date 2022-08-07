@@ -5,15 +5,6 @@
       </parallax>
       <div class="container">
         <div class="content-center brand">
-          <img
-            class="n-logo"
-            :src="
-              currentEnv === 'development'
-                ? 'img/now-logo.png'
-                : `webjars/the-gate-user-panel/v${version}/img/now-logo.png`
-            "
-            alt=""
-          />
           <h1 class="h1-seo">THE GATE</h1>
           <h3>Your enterance to happiness.</h3>
         </div>
@@ -44,8 +35,8 @@ export default {
     },
     backgroundImageStyle() {
       return this.currentEnv === "development"
-        ? "background-image: url('img/header.jpg');"
-        : `background-image: url('webjars/the-gate-user-panel/v${this.version}/img/header.jpg');`;
+        ? "background-image: url('/home-bg.jpg');"
+        : `background-image: url('webjars/the-gate-user-panel/v${this.version}/home-bg.jpg');`;
     },
   },
   methods: {
