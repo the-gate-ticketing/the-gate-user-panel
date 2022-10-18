@@ -34,6 +34,13 @@
           filling your info. You are responsible to contact us if any problem
           occurred like not receiving a confirmation mail. Only you can
           recognize any problem that may occur during your purchasing process.
+
+          For curtain events we do some heavy selection. As a result in those
+          events you may reserve, pay for your ticket and receive an email with
+          your QR-Code to the event but you’ll still be on pending till we
+          confirm. In case you’re reservation wasn’t confirmed we will
+          automatically deactivate your QR-Code and refund your money with in 24
+          hours. An email will be send to you in this case.
         </p>
         <h5 class="mt-0">Receiving your tickets</h5>
         <p class="blockquote">
