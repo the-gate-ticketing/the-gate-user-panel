@@ -6,10 +6,16 @@ plugins {
 apply plugin:'java'
 apply plugin: 'maven'
 
+// Theme to build: -Ptheme=cocoya | trope | the-gate (default).
+// Selects src/themes/<theme> at build time and suffixes the jar name.
+def theme = (project.findProperty('theme') ?: 'the-gate').toString()
+
 node {
   version = '14.18.1'
   npmVersion = '6.14.15'
-  download = true
+  // nodejs.org blocks the ivy metadata fetch this old plugin performs, and Node 14
+  // has no darwin-arm64 build; -PnodeDownload=false uses node/npm from PATH instead.
+  download = (project.findProperty('nodeDownload') ?: 'true').toString().toBoolean()
   workDir = file("${project.projectDir}/node")
   nodeModulesDir = file("${project.projectDir}/")
 }
@@ -29,10 +35,16 @@ clean.dependsOn(npmClean)
 processResources.dependsOn(npm_install)
 processResources.dependsOn(npm_run_build)
 
+npm_run_build {
+  environment = ['VUE_APP_THEME': theme]
+}
+
 jar {
-  archiveBaseName.set('the-gate-user-panel')
+  // The jar file name carries the theme; the webjar path inside stays
+  // 'the-gate-user-panel' for every theme so the backend needs no URL changes.
+  archiveBaseName.set(theme == 'the-gate' ? 'the-gate-user-panel' : "the-gate-user-panel-${theme}")
   version = "${version}"
-  into("META-INF/resources/webjars/${archiveBaseName.get()}/${version}") {
+  into("META-INF/resources/webjars/the-gate-user-panel/${version}") {
       from 'dist'
   }
 }
