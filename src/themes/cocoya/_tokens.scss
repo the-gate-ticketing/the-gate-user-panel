@@ -1,0 +1,25 @@
+// COCOYA brand tokens — official palette from "COCOYA On Ground Branding" p.2.
+// Injected before every SCSS compile (see vue.config.js).
+
+// Venue shell tokens
+$venue-paper: #f4edde;
+$venue-cream: #e7dcc8;
+$venue-deep: #135b57;
+$venue-deep-ink: #0c403d;
+$venue-ink: #3b3126;
+$venue-ink-soft: rgba(59, 49, 38, 0.66);
+$venue-cta: #e0680e;
+$venue-cta-hover: #c45a0a;
+$venue-accent: #f4b044;
+$venue-on-deep: #efe6d2;
+$venue-font-display: "Playfair Display", "Times New Roman", serif;
+$venue-font-editorial: "Cormorant Garamond", Georgia, serif;
+$venue-font-body: "Manrope", "Helvetica Neue", Arial, sans-serif;
+
+// Now UI Kit overrides, for any kit-styled elements that remain visible.
+$primary-color: #e0680e;
+$primary-states-color: #c45a0a;
+$info-color: #135b57;
+$black-color: #3b3126;
+$smoke-bg: #f4edde;
+$sans-serif-family: "Manrope", "Helvetica Neue", Arial, sans-serif;

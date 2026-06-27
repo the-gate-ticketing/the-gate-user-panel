@@ -1,0 +1,31 @@
+// TROPÉ Beach Club — brand tokens from the official brand book.
+// Palette: Soleil, Olive, Sable, Lin, Sauge, Marine. Saint-Tropez · vintage Riviera.
+// Type: Cormorant Garamond (primary + accent italic), Gotham (→ Manrope on web).
+
+// Venue shell tokens
+$venue-paper: #f3e8d7; // Sable
+$venue-cream: #e6dccc; // Lin
+$venue-deep: #4f5a2f; // Olive
+$venue-deep-ink: #3a4423; // darker olive
+$venue-ink: #2f3720; // deep olive ink (body copy)
+$venue-ink-soft: rgba(47, 55, 32, 0.66);
+$venue-cta: #e86a1c; // Soleil
+$venue-cta-hover: #cf5d15;
+$venue-accent: #e86a1c; // Soleil
+$venue-sage: #a5b18a; // Sauge
+$venue-marine: #182330; // Marine
+$venue-on-deep: #f3e8d7; // Sable on olive
+
+// Typography — Cormorant Garamond leads (elegant, French Riviera), Manrope
+// stands in for Gotham as the clean sans.
+$venue-font-display: "Cormorant Garamond", "Times New Roman", serif;
+$venue-font-editorial: "Cormorant Garamond", Georgia, serif;
+$venue-font-body: "Manrope", "Helvetica Neue", Arial, sans-serif;
+
+// Now UI Kit overrides
+$primary-color: #e86a1c;
+$primary-states-color: #cf5d15;
+$info-color: #4f5a2f;
+$black-color: #2f3720;
+$smoke-bg: #f3e8d7;
+$sans-serif-family: "Manrope", "Helvetica Neue", Arial, sans-serif;

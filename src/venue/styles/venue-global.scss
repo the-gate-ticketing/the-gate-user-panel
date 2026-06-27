@@ -1,0 +1,130 @@
+// Global venue styles — imported once by the theme's index.js.
+@import "defaults";
+
+html,
+body {
+  background: $venue-paper;
+}
+
+body {
+  font-family: $venue-font-body;
+  color: $venue-ink;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: $venue-accent;
+  color: $venue-ink;
+}
+
+// Shared venue primitives ----------------------------------------------------
+
+.v-label {
+  font-family: $venue-font-body;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: $venue-cta;
+}
+
+.v-display {
+  font-family: $venue-font-display;
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  color: $venue-ink;
+
+  em {
+    font-family: $venue-font-editorial;
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+}
+
+.v-editorial {
+  font-family: $venue-font-editorial;
+  font-size: 1.25rem;
+  line-height: 1.55;
+  color: $venue-ink-soft;
+}
+
+.v-btn {
+  display: inline-block;
+  padding: 0.95rem 2.2rem;
+  border: 0;
+  border-radius: $venue-radius;
+  background: $venue-cta;
+  font-family: $venue-font-body;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  transition: background 0.25s $venue-ease, transform 0.25s $venue-ease;
+
+  &:hover,
+  &:focus {
+    background: $venue-cta-hover;
+    color: #fff;
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+}
+
+.v-btn--ghost {
+  background: transparent;
+  border: 1px solid rgba(59, 49, 38, 0.35);
+  color: $venue-ink;
+
+  &:hover,
+  &:focus {
+    background: $venue-ink;
+    border-color: $venue-ink;
+    color: $venue-paper;
+    transform: translateY(-2px);
+  }
+}
+
+// Hairline rule with a small amber tick — section divider signature.
+.v-rule {
+  position: relative;
+  height: 1px;
+  background: rgba(59, 49, 38, 0.18);
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -2px;
+    width: 56px;
+    height: 5px;
+    background: $venue-accent;
+  }
+}
+
+// Page-load reveal: staggered fade-up. Apply .v-reveal, add inline
+// animation-delay for stagger.
+.v-reveal {
+  opacity: 0;
+  animation: v-fade-up 0.9s $venue-ease forwards;
+}
+
+@keyframes v-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-reveal {
+    animation: none;
+    opacity: 1;
+  }
+}

@@ -1,0 +1,30 @@
+// Venue shell design tokens.
+// Every value is !default: the active theme's _tokens.scss (injected before any
+// SCSS compile via vue.config.js prependData) takes precedence. Components import
+// this file to get the resolved tokens.
+
+// Surfaces
+$venue-paper: #f4edde !default; // page background — warm paper
+$venue-cream: #e7dcc8 !default; // alternate section background
+$venue-deep: #135b57 !default; // dark surface — navbar overlay, footer, menu
+$venue-deep-ink: #0d3f3c !default; // darker edge of the deep surface
+
+// Ink & accents
+$venue-ink: #3b3126 !default; // primary text
+$venue-ink-soft: rgba(59, 49, 38, 0.66) !default; // secondary text
+$venue-cta: #e0680e !default; // call-to-action — used for nothing else
+$venue-cta-hover: #c75a09 !default;
+$venue-accent: #f4b044 !default; // hairlines, labels, hover details
+$venue-on-deep: #efe6d2 !default; // text on deep surfaces
+
+// Typography
+$venue-font-display: "Playfair Display", "Times New Roman", serif !default;
+$venue-font-editorial: "Cormorant Garamond", Georgia, serif !default;
+$venue-font-body: "Manrope", "Helvetica Neue", Arial, sans-serif !default;
+
+// Shape
+$venue-arch: 999px 999px 0 0 !default; // the arch portal — the brand motif
+$venue-radius: 2px !default;
+
+// Motion
+$venue-ease: cubic-bezier(0.22, 1, 0.36, 1) !default;
