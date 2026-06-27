@@ -1,10 +1,8 @@
 import Vue from 'vue';
 import App from './App.vue';
-// You can change this import to `import router from './starterRouter'` to quickly start development from a blank layout.
-// import router from './router';
-// THE GATE router
-import router from '@/TheGate/router';
-import store from '@/TheGate/store';
+// The app shell (router + store) comes from the active theme.
+// @theme resolves to src/themes/<VUE_APP_THEME> (default: the-gate) — see vue.config.js.
+import { router, store } from '@theme';
 import NowUiKit from './plugins/now-ui-kit';
 
 Vue.config.productionTip = false;

@@ -5,8 +5,7 @@
     <link
       rel="icon"
       type="image/png"
-      sizes="376x376"
-      href="<%= BASE_URL %>the-gate.png"
+      href="<%= BASE_URL %><%= htmlWebpackPlugin.options.faviconHref %>"
     />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta
@@ -14,10 +13,10 @@
       name="viewport"
     />
 
-    <title>THE GATE</title>
+    <title><%= htmlWebpackPlugin.options.title %></title>
 
     <link
-      href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200"
+      href="<%= htmlWebpackPlugin.options.fontsHref %>"
       rel="stylesheet"
     />
     <link
@@ -28,8 +27,8 @@
   <body class="sidebar-collapse">
     <noscript>
       <strong>
-        We're sorry but THE GATE doesn't work properly without JavaScript
-        enabled. Please enable it to continue.
+        We're sorry but <%= htmlWebpackPlugin.options.brandName %> doesn't work
+        properly without JavaScript enabled. Please enable it to continue.
       </strong>
     </noscript>
     <div id="app"></div>
