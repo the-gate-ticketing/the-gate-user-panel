@@ -17,7 +17,8 @@ export default {
     motif: 'arch',
     image: require('./assets/trope-hero.jpg'),
     imagePosition: '50% 50%',
-    caption: 'Saint-Tropez',
+    // Size the arch to the photo's 4:5 ratio so the full branded shot shows uncropped.
+    mediaAspect: '4 / 5',
   },
 
   essence: {

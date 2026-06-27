@@ -17,8 +17,10 @@ export default {
     // (see .v-hero__arch in venue/pages/Home.vue). Omit on other themes.
     motif: 'arch',
     // Swap this file to change the hero image — portrait/tall shots suit the arch best.
+    // When `video` is set it plays (muted, looped, autoplay) inside the arch and the
+    // image below is used as the poster/fallback frame. Drop `video` to revert to a still.
     image: require('./assets/hero-arch.jpg'),
-    caption: 'Beach resto · bar',
+    video: require('./assets/cocoya-hero.mp4'),
   },
 
   essence: {

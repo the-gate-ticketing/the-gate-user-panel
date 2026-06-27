@@ -4,9 +4,26 @@
       <figure
         v-if="content.hero.motif === 'arch'"
         class="v-hero__arch"
+        :class="{ 'v-hero__arch--fit': content.hero.mediaAspect }"
+        :style="content.hero.mediaAspect ? { '--v-arch-aspect': content.hero.mediaAspect } : null"
         aria-hidden="true"
       >
+        <video
+          v-if="content.hero.video"
+          ref="heroArchVideo"
+          class="v-hero__arch-img v-hero__arch-video"
+          :poster="content.hero.image"
+          :style="content.hero.imagePosition ? { objectPosition: content.hero.imagePosition } : null"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+        >
+          <source :src="content.hero.video" type="video/mp4" />
+        </video>
         <img
+          v-else
           class="v-hero__arch-img"
           :src="content.hero.image"
           :style="content.hero.imagePosition ? { objectPosition: content.hero.imagePosition } : null"
@@ -289,12 +306,30 @@ export default {
       if (ext) ext.loseContext();
       this.$_heroShader = null;
     },
+    initHeroVideo() {
+      const video = this.$refs.heroArchVideo;
+      if (!video) return;
+      // Vue 2 doesn't reflect the template `muted` attribute to the DOM property,
+      // and browsers block autoplay unless the property is muted — set it here.
+      video.muted = true;
+      // Honour reduced-motion: keep the poster frame, don't autoplay.
+      const reduce =
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce) {
+        video.removeAttribute("autoplay");
+        return;
+      }
+      const play = video.play();
+      if (play && typeof play.catch === "function") play.catch(() => {});
+    },
   },
   async created() {
     await this.fetchEvents();
   },
   mounted() {
     if (this.content.hero.motif === "shader") this.initHeroShader();
+    this.initHeroVideo();
   },
   beforeDestroy() {
     this.teardownHeroShader();
@@ -376,6 +411,12 @@ export default {
   }
 }
 
+// Opt-in (theme sets hero.mediaAspect): size the arch to the media's aspect ratio
+// so the full photo/video shows uncropped — object-fit: cover then fills exactly.
+.v-hero__arch--fit {
+  aspect-ratio: var(--v-arch-aspect);
+}
+
 // Soft cream wash over the top band so the transparent navbar's dark links
 // stay legible where they overlap the arch image. Sits above the arch
 // (z-index 0) but below the hero text (z-index 1).
@@ -406,6 +447,11 @@ export default {
   object-fit: cover;
   filter: saturate(1.06) contrast(1.02);
   animation: v-arch-kb 24s ease-in-out infinite alternate;
+}
+
+// The video supplies its own motion, so drop the slow Ken Burns pan/zoom.
+.v-hero__arch-video {
+  animation: none;
 }
 
 .v-hero__arch-frame {
@@ -756,6 +802,15 @@ export default {
     display: block;
   }
 
+  // Fit variant: a centered arched card sized by the media aspect (no full-height
+  // crop). Height derives from the 33% width via aspect-ratio.
+  .v-hero__arch--fit {
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+    height: auto;
+  }
+
   .v-hero__topscrim {
     display: block;
   }
@@ -772,6 +827,43 @@ export default {
 
   .v-essence__line {
     font-size: 2.6rem;
+  }
+}
+
+// ── Mobile (< tablet): the arch is hidden as an absolute side-panel up top, so
+// bring the hero media back as a centered, portrait arched "window" that leads
+// the stacked hero. Same Moorish silhouette as desktop — keeps the brand mark on
+// phones — holding the theme's media (COCOYA video / TROPÉ photo) via the shared
+// .v-hero__arch markup, then the headline reads below it.
+@media (max-width: 767.98px) {
+  .v-hero {
+    justify-content: flex-start; // media-first stack flows from the top
+  }
+
+  .v-hero__arch {
+    display: block;
+    position: relative;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    width: 100%;
+    max-width: 300px;
+    height: min(52vh, 420px);
+    margin: 0 auto 2.25rem; // centered portal, breathing room before the title
+    opacity: 0;
+    animation: v-fade-up 0.9s $venue-ease 0.04s forwards; // joins the hero's reveal cadence
+  }
+
+  // Fit variant: drop the fixed height so the media aspect ratio sizes the arch.
+  .v-hero__arch--fit {
+    height: auto;
+  }
+}
+
+@media (max-width: 767.98px) and (prefers-reduced-motion: reduce) {
+  .v-hero__arch {
+    opacity: 1;
+    animation: none;
   }
 }
 </style>
