@@ -29,6 +29,16 @@
           :style="content.hero.imagePosition ? { objectPosition: content.hero.imagePosition } : null"
           alt=""
         />
+        <!-- iOS WebKit won't clip a <video> to the arch (paints a full rectangle).
+             On mobile we paint the video's frames into this canvas, clipped to the
+             arch in raster space, with the cream page showing through the corners.
+             Desktop keeps the raw <video> above (Blink clips it fine). -->
+        <canvas
+          v-if="content.hero.video"
+          ref="heroArchCanvas"
+          class="v-hero__arch-canvas"
+          aria-hidden="true"
+        ></canvas>
         <span class="v-hero__arch-frame"></span>
         <figcaption v-if="content.hero.caption" class="v-hero__arch-cap">
           <span class="v-hero__arch-dot"></span>{{ content.hero.caption }}
@@ -323,6 +333,121 @@ export default {
       const play = video.play();
       if (play && typeof play.catch === "function") play.catch(() => {});
     },
+    // iOS WebKit (Safari + iOS Chrome) refuses to clip a <video> to a rounded/
+    // arch shape — the video composites as a full rectangle and spills past the
+    // curve, leaving the arch outline floating over a rectangle. A <canvas>,
+    // however, clips fine: we draw the playing <video>'s frames into a canvas,
+    // clipping inside the raster to the arch path, and let the canvas's cream
+    // CSS background show through the transparent corners. Mobile only — desktop
+    // (Blink) clips the raw <video> correctly, so we leave it untouched.
+    initHeroArchCanvas() {
+      if (this.$_heroArchCanvas) return; // already running
+      const canvas = this.$refs.heroArchCanvas;
+      const video = this.$refs.heroArchVideo;
+      if (!canvas || !video) return;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
+      const state = { raf: 0, reduce: false, w: 0, h: 0, dpr: 1, poster: null };
+
+      // Arch silhouette matching .v-hero__arch border-radius (9999/9999/14/14 →
+      // a semicircle dome on top, near-square base). Built in raster space so the
+      // clip never touches the <video> element (which iOS would mis-clip).
+      const archPath = (w, h) => {
+        const r = w / 2;
+        ctx.beginPath();
+        ctx.arc(w / 2, r, r, Math.PI, 2 * Math.PI); // dome across the top
+        ctx.lineTo(w, h); // right edge down
+        ctx.lineTo(0, h); // base
+        ctx.lineTo(0, r); // left edge back up to the dome
+        ctx.closePath();
+      };
+
+      // object-fit: cover — fill the arch box, centre-cropped.
+      const drawCover = (media, mw, mh) => {
+        if (!mw || !mh) return;
+        const scale = Math.max(state.w / mw, state.h / mh);
+        const dw = mw * scale;
+        const dh = mh * scale;
+        ctx.drawImage(media, (state.w - dw) / 2, (state.h - dh) / 2, dw, dh);
+      };
+
+      const paint = (media, mw, mh) => {
+        ctx.clearRect(0, 0, state.w, state.h); // corners → transparent → CSS cream
+        ctx.save();
+        archPath(state.w, state.h);
+        ctx.clip();
+        drawCover(media, mw, mh);
+        ctx.restore();
+      };
+
+      const size = () => {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const w = canvas.clientWidth;
+        const h = canvas.clientHeight;
+        if (w === state.w && h === state.h && dpr === state.dpr) return;
+        state.w = w;
+        state.h = h;
+        state.dpr = dpr;
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // draw in CSS pixels
+      };
+
+      const loop = () => {
+        size();
+        if (video.readyState >= 2) {
+          paint(video, video.videoWidth, video.videoHeight);
+        }
+        state.raf = window.requestAnimationFrame(loop);
+      };
+
+      const onResize = () => {
+        if (state.reduce && state.poster) {
+          size();
+          paint(state.poster, state.poster.naturalWidth, state.poster.naturalHeight);
+        }
+      };
+
+      const onVisibility = () => {
+        if (document.hidden) {
+          window.cancelAnimationFrame(state.raf);
+          state.raf = 0;
+        } else if (!state.reduce && !state.raf) {
+          state.raf = window.requestAnimationFrame(loop);
+        }
+      };
+
+      size();
+      state.reduce =
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (state.reduce) {
+        // No autoplay under reduced motion — paint the still poster once.
+        const img = new Image();
+        img.onload = () => {
+          state.poster = img;
+          size();
+          paint(img, img.naturalWidth, img.naturalHeight);
+        };
+        img.src = this.content.hero.image;
+      } else {
+        state.raf = window.requestAnimationFrame(loop);
+      }
+
+      window.addEventListener("resize", onResize);
+      document.addEventListener("visibilitychange", onVisibility);
+      this.$_heroArchCanvas = { state, onResize, onVisibility };
+    },
+    teardownHeroArchCanvas() {
+      const s = this.$_heroArchCanvas;
+      if (!s) return;
+      window.cancelAnimationFrame(s.state.raf);
+      window.removeEventListener("resize", s.onResize);
+      document.removeEventListener("visibilitychange", s.onVisibility);
+      this.$_heroArchCanvas = null;
+    },
   },
   async created() {
     await this.fetchEvents();
@@ -330,9 +455,33 @@ export default {
   mounted() {
     if (this.content.hero.motif === "shader") this.initHeroShader();
     this.initHeroVideo();
+    // Mobile arch + video → drive the iOS-safe canvas (and follow the breakpoint).
+    if (
+      this.content.hero.motif === "arch" &&
+      this.content.hero.video &&
+      window.matchMedia
+    ) {
+      const mql = window.matchMedia("(max-width: 767.98px)");
+      this.$_archMql = mql;
+      this.$_archMqlHandler = (e) => {
+        if (e.matches) this.initHeroArchCanvas();
+        else this.teardownHeroArchCanvas();
+      };
+      if (mql.matches) this.initHeroArchCanvas();
+      if (mql.addEventListener) mql.addEventListener("change", this.$_archMqlHandler);
+      else mql.addListener(this.$_archMqlHandler);
+    }
   },
   beforeDestroy() {
     this.teardownHeroShader();
+    this.teardownHeroArchCanvas();
+    if (this.$_archMql && this.$_archMqlHandler) {
+      if (this.$_archMql.removeEventListener) {
+        this.$_archMql.removeEventListener("change", this.$_archMqlHandler);
+      } else {
+        this.$_archMql.removeListener(this.$_archMqlHandler);
+      }
+    }
   },
 };
 </script>
@@ -452,6 +601,12 @@ export default {
 // The video supplies its own motion, so drop the slow Ken Burns pan/zoom.
 .v-hero__arch-video {
   animation: none;
+}
+
+// iOS-safe arch video: desktop clips the raw <video> fine, so the canvas is
+// hidden there and only switched on at the mobile breakpoint below.
+.v-hero__arch-canvas {
+  display: none;
 }
 
 .v-hero__arch-frame {
@@ -857,6 +1012,26 @@ export default {
   // Fit variant: drop the fixed height so the media aspect ratio sizes the arch.
   .v-hero__arch--fit {
     height: auto;
+  }
+
+  // iOS WebKit can't clip the <video> to the arch, so on mobile the canvas
+  // (which CAN be clipped, in raster space) paints the video frames over it.
+  // Its cream background fills the corners opaquely so the arch reads as
+  // floating on the page. See initHeroArchCanvas() in <script>.
+  .v-hero__arch-canvas {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 1; // above the raw <video> (z 0), below the frame (z 2)
+    width: 100%;
+    height: 100%;
+    background: $venue-paper; // opaque cream surround behind the arch raster
+  }
+
+  // The brand-cohesion scrim would multiply over the cream corners and tint
+  // them off-page; the canvas owns the media box on mobile, so drop it.
+  .v-hero__arch::after {
+    display: none;
   }
 }
 
