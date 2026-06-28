@@ -39,6 +39,9 @@ export default {
     ],
   },
 
+  // Daytime beach club — the calendar runs on long sun-soaked days, not nights.
+  upcoming: { title: 'Upcoming', accent: 'days' },
+
   footerLine: 'Sip slow,',
   footerLineAccent: 'stay salty.',
   menuFootline: 'Sun. Style. Spritz. Saint-Tropez.',

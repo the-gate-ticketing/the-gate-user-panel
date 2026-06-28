@@ -109,7 +109,7 @@
     <section v-if="events.length" class="v-upcoming">
       <div class="v-upcoming__head">
         <p class="v-label">On the calendar</p>
-        <h2 class="v-display v-upcoming__title">Upcoming <em>nights</em></h2>
+        <h2 class="v-display v-upcoming__title">{{ upcomingHeading.title }} <em>{{ upcomingHeading.accent }}</em></h2>
       </div>
       <div class="v-upcoming__grid">
         <div
@@ -212,6 +212,13 @@ export default {
     ...mapGetters({ events: "events/events" }),
     upcoming() {
       return this.events.slice(0, 3);
+    },
+    // Section heading is theme-driven so each venue sets its own tempo
+    // (TROPÉ is a daytime beach club → "days"; COCOYA runs day-to-night → "nights").
+    // Falls back to the original wording for themes that don't override it.
+    upcomingHeading() {
+      const u = this.content.upcoming || {};
+      return { title: u.title || "Upcoming", accent: u.accent || "nights" };
     },
   },
   methods: {

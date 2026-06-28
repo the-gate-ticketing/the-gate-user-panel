@@ -42,6 +42,9 @@ export default {
     ],
   },
 
+  // Day-to-night Mediterranean club — golden afternoons into electric nights.
+  upcoming: { title: 'Upcoming', accent: 'nights' },
+
   footerLine: 'Shake, sabor,',
   footerLineAccent: 'shine.',
   menuFootline: 'Golden hour starts here.',
