@@ -508,10 +508,10 @@ export default {
   // Golden-hour horizon: amber glow rising from the lower edge into warm paper.
   background:
     radial-gradient(
-      120% 75% at 50% 108%,
-      rgba(244, 176, 68, 0.5) 0%,
-      rgba(224, 104, 14, 0.18) 38%,
-      rgba(244, 237, 222, 0) 70%
+      135% 88% at 50% 110%,
+      rgba(244, 176, 68, 0.78) 0%,
+      rgba(224, 104, 14, 0.36) 42%,
+      rgba(244, 237, 222, 0) 82%
     ),
     $venue-paper;
 
