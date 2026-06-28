@@ -1,0 +1,24 @@
+// COCOYA — NIGHT MODE brand tokens.
+// Same official COCOYA palette (brand book p.2) with the value structure
+// inverted: the deep teal/espresso becomes the page SURFACE and burnt orange +
+// amber become warm low-light glow. Reuses the COCOYA brand pack verbatim, then
+// overrides the surface + ink tokens for an after-dark, resto-bar mood.
+@import "../cocoya/tokens";
+
+// Night surfaces — espresso-teal lacquer, near black (derived from $venue-deep)
+$venue-paper: #07191a; // page background — deep espresso-teal
+$venue-cream: #0a2422; // alternate panels / event-card portal ground
+$venue-deep: #0c403d; // "deep surface" (footer, mobile menu) toned down so it
+$venue-deep-ink: #07191a; // settles into the page instead of a bright teal band
+
+// Ink flips to cream on the dark ground; CTA + accent stay the brand warmth.
+$venue-ink: #efe6d2; // primary text
+$venue-ink-soft: rgba(239, 230, 210, 0.62); // secondary text
+$venue-on-deep: #efe6d2;
+
+// Now UI Kit overrides — keep brand CTA/info, dark the kit smoke background.
+$primary-color: #e0680e;
+$primary-states-color: #c45a0a;
+$info-color: #135b57;
+$black-color: #efe6d2;
+$smoke-bg: #07191a;

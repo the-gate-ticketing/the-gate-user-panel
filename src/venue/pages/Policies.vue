@@ -63,7 +63,7 @@ export default {
 .v-policies__card {
   display: block;
   padding: 2rem 1.8rem;
-  border: 1px solid rgba(59, 49, 38, 0.22);
+  border: 1px solid rgba($venue-ink, 0.22);
   border-radius: $venue-radius;
   transition: border-color 0.3s $venue-ease, transform 0.3s $venue-ease;
 

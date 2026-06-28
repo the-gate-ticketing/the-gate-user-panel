@@ -5,6 +5,7 @@
         <img
           :src="content.logo"
           :alt="content.brandName"
+          :class="{ 'v-nav__brand--invert': content.logoInvert }"
           :style="{ height: (content.logoHeight || 22) + 'px' }"
         />
       </router-link>
@@ -113,14 +114,20 @@ export default {
     padding 0.35s $venue-ease;
 
   &--solid {
-    background: rgba(244, 237, 222, 0.96);
-    box-shadow: 0 1px 0 rgba(59, 49, 38, 0.12);
+    background: rgba($venue-paper, 0.96);
+    box-shadow: 0 1px 0 rgba($venue-ink, 0.12);
     padding: 0.65rem 1.25rem;
   }
 }
 
 .v-nav__brand img {
   display: block; // height comes from content.logoHeight (square lockups need more than wordmarks)
+}
+
+// Dark-ink wordmarks (e.g. COCOYA) sit on a dark surface in night themes —
+// lift the flat ink to cream. Opt-in via content.logoInvert.
+.v-nav__brand--invert {
+  filter: brightness(0) invert(0.94);
 }
 
 // The wordmark is dark ink; lift it to near-white over the open menu's deep surface.

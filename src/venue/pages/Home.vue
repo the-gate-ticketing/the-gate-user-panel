@@ -1,6 +1,11 @@
 <template>
   <main>
-    <section class="v-hero">
+    <section class="v-hero" :class="{ 'v-hero--night': content.hero.night }">
+      <span
+        v-if="content.hero.night"
+        class="v-hero__ember"
+        aria-hidden="true"
+      ></span>
       <figure
         v-if="content.hero.motif === 'arch'"
         class="v-hero__arch"
@@ -530,6 +535,96 @@ export default {
     z-index: 1;
     max-width: 680px;
   }
+}
+
+// ── Night mode (opt-in via content.hero.night) ──────────────────────────────
+// Inverts the golden-hour hero into an after-dark, resto-bar mood: warm light
+// rising from the floor over a deep espresso-teal ground, plus an amber ember
+// glow behind the headline. Tokens carry the rest of the page; this only
+// retreats the hardcoded daytime hero gradient.
+.v-hero--night {
+  background:
+    radial-gradient(
+      120% 80% at 18% 118%,
+      rgba($venue-cta, 0.42) 0%,
+      rgba($venue-cta, 0) 55%
+    ),
+    radial-gradient(
+      90% 70% at 92% -10%,
+      rgba($venue-accent, 0.16) 0%,
+      rgba($venue-accent, 0) 50%
+    ),
+    radial-gradient(140% 120% at 50% 50%, rgba(#135b57, 0.5) 0%, $venue-paper 70%),
+    $venue-paper;
+
+  // The page grain reads lighter over the dark ground.
+  &::after {
+    opacity: 0.18;
+  }
+}
+
+// Soft amber ember flicker behind the headline — candlelight, not sunshine.
+.v-hero__ember {
+  position: absolute;
+  z-index: 0;
+  left: -10%;
+  bottom: -20%;
+  width: 60%;
+  height: 60%;
+  max-width: none; // override .v-hero > * { max-width: 680px }
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    rgba($venue-accent, 0.2) 0%,
+    rgba($venue-accent, 0) 65%
+  );
+  filter: blur(8px);
+  animation: v-ember 6s ease-in-out infinite;
+}
+
+@keyframes v-ember {
+  0%,
+  100% {
+    opacity: 0.82;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-hero__ember {
+    animation: none;
+  }
+}
+
+// Night arch — the brand portal lit from within: photo dimmed, warm light
+// spilling out at the base, amber rim. Overrides the daytime arch scrim.
+.v-hero--night .v-hero__arch {
+  box-shadow:
+    0 40px 90px -30px rgba(0, 0, 0, 0.8),
+    0 0 80px -10px rgba($venue-cta, 0.45),
+    inset 0 0 0 1px rgba($venue-accent, 0.4);
+
+  &::after {
+    background: linear-gradient(
+      180deg,
+      rgba(#135b57, 0.45) 0%,
+      rgba($venue-paper, 0.15) 45%,
+      rgba($venue-paper, 0.78) 100%
+    );
+    mix-blend-mode: normal;
+  }
+}
+
+.v-hero--night .v-hero__arch-img {
+  filter: saturate(1.05) brightness(0.62) contrast(1.05);
+}
+
+.v-hero--night .v-hero__arch-frame {
+  border-color: rgba($venue-accent, 0.55);
 }
 
 // Arched window — golden-hour image in a Moorish arch that fills the empty

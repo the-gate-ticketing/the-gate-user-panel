@@ -6,6 +6,15 @@ body {
   background: $venue-paper;
 }
 
+// Now UI Kit ships a global `body { background:#fff }` (body also carries the
+// kit's .sidebar-collapse class). On light venue themes that white is harmless,
+// but on night mode it flashes through wherever no section paints over it (e.g.
+// the hero's lower edge). Beat the kit with a higher-specificity selector —
+// same colour for every theme, no !important.
+html body {
+  background: $venue-paper;
+}
+
 body {
   font-family: $venue-font-body;
   color: $venue-ink;
@@ -75,7 +84,7 @@ body {
 
 .v-btn--ghost {
   background: transparent;
-  border: 1px solid rgba(59, 49, 38, 0.35);
+  border: 1px solid rgba($venue-ink, 0.35);
   color: $venue-ink;
 
   &:hover,
@@ -91,7 +100,7 @@ body {
 .v-rule {
   position: relative;
   height: 1px;
-  background: rgba(59, 49, 38, 0.18);
+  background: rgba($venue-ink, 0.18);
 
   &::after {
     content: "";
